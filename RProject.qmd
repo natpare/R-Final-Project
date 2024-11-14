@@ -1,2 +1,148 @@
-"My R Final Project" 
+#My R Final Project#
 I love whales :0
+
+**What specifics I would find helpful for feedback (and anything else you deem helpful - thanks!):**
+- general formatting stuff, what is working now and should work better (since ive never written in R like that)
+- flow of the intro and what needs more or less detail/what is necessary and not to include
+- is my question too broad? do i need to break it into more specific questions?
+- is it helpful to go into more depth on jeffreys ledge in the methods describing the study sight, or should i limit that to the intro?
+- do i need to be more specifc or less specifc on the survey methods via mysticetus?
+- help with R methods please! - i am also still waiting on data to be processed so that is slowing me down in terms of making figures which is real frustrating
+- and help figuring out which graphs may be most helpful to get these points across
+
+##Introduction##
+Large baleen whales, like humpback whales are very migratory species. Humpback whales specifically in the North Atlantic population spend their winter months down south in the Caribbean mating and calving and alternating years with such behaviors. During those months, they are relying on their thick blubber layer to sustain themselves, as there is no reliable food source to feed large aggregations of large whales in those areas. In the spring, they will migrate north to their feeding grounds, where they will primarily focus on chasing down schools of fish through the fall before heading back south and repeating the cycle. 
+
+There are two notable feeding grounds in the New England area that these whales frequent during those spring, summer, and fall months. These landmarks are known as Stellwagon Bank and Jeffrey's Ledge. The change in elevation between these areas and the surrounding water produce upwelling currents that bring in large amounts of nutrient and fuel the growth of plankton that bring in the schooling fish. Because of this productivity, these landmarks are successful spots to sight animals like humpback whales, fin whales, minke whales, atlantic white-sides dolphins, bluefin tuna, and other marine life also feeding on similar prey.
+
+These productive areas have also promoted a successful tourist culture of whale watching. New England is one of the world's most popular destinations for such activities, with almost 30 whale watching companies working between the two productive landmarks. While the migration patterns of humpback whales are well known, and many known whales return to the same feeding grounds year after year, there is still significant seasonal fluctuation that can be seen through these whale watching vessels.
+
+One in particular, Granite State Whale Watching works in conjunction with the Blue Ocean Society to collect data while taking tourists to see these animals in their natural habitat. This data seeks to understand the population.
+
+Using the Blue Ocean data form the 2023 and 2024 seasons, this study seeks to show the seasonal and between season fluctuations of whale watching, by answering the broad question of what trends and patterns can be observed between associations, behaviors, and sightings of animals between the 2023 and 2024 whale watching seasons?
+
+##Methods##
+*The data used in this study is courtesy of the Blue Ocean Society for Marine Conservation that records survey data about marine life in the Gulf of Maine.
+##Study Area##
+The specific area of study within the Gulf of Maine was Jeffrey's Ledge. It is a series of ledges and plateaus 54km long off the coasts of Maine, New Hampshire and Massachusetts stretching from Kennebunk, Maine to Cape Ann, Massachusetts. The water above the ledge ranges from 40-50m while the average water depth around the ledge is 90-150m (find a source and cite it please). This difference produces upwelling currents that fuel a productive feeding ground for whales and other animals within the GOM during the spring fall and summer months.
+I think I should include this because people may not know about the ledge and why it's important...but is it better suited for the intro?
+###Survey Methods###
+Data was collected on opportunistic surveys on the M/V Granite State, a commercial whale watching vessel based in Rye, New Hampshire. Whale watches typically lasted 4-5 hours, generally conducted once daily in the months of May, June, September and October, and twice daily in July and August, weather permitting (cite BOS). The program Mysticetus was used for data collection. The trip information was recorded for each trip including date, captain, naturalist and trip number, high tide, moon phase, data recorder, and number of passengers. Effort and environment data was recorded every 15-20 minutes or when changing efforts from transit to follow. These observations included weather, wind speed and direction, Beaufort, sea state, swell, visibility, cloud cover, water temperature, and air temperature. Large marine animal sightings as well as marine debris were marked in the sightings tab including distance, bearing, species, number (including calves if applicable), associations, and counts for boats and buoys that could be potential threats, and counts of pelagic birds in the same area. Any unique behaviors for these animal sightings were recorded in the behaviors tab. Individual behaviors and behavior states were included.
+###Data Cleaning and Organization###
+The csv files provided by the Blue Ocean Society were loaded into R using the "read.csv" command. The data was cleaned and sorted using the packages dplyr and tidyverse. The 2023 and 2024 data sets were combined for compared graphs by year using the bind_rows command.
+##Graphing##
+Maybe I'll break this into small italic headers for all the relationships I want to look at and what I did specifically to make those plots...
+
+I think it may be more helpful here to talk about what I want to do and then write it out once I actually do it and know for sure what the methods are:
+- may do a separeate 2023 and 2024 graph comparing sightings across months (facet by month)
+- may do the same for behaviors
+- combine data for 2023 and 2024 (using bind_rows?), sightings, behavior, effort/env
+- 
+
+*I am also collecting my sources on another document before I learn how to use zotero with R so don't be alarmed that there are no in-text citations, they will make it in the final, I promise*
+
+^for reference on the methods, I am still waiting on the 2024 data in more formats than just the summary (the others are more detailed and what I want to use) and thus I am sort of unsure of how exactly I am going to mess around with it because I know I will need to join the years for the different csv files to facet by year to show things side by side like I want...but otherwise behind and stuck!
+
+
+
+
+here is me starting to mess around with graphs - I am still waiting on the data from this year and I have graphs due soon for my capstone course
+
+lil reminder on how to load in data...was going to do it now but i'm not so sure lol data \<- read.csv("yourfile.csv")
+
+```{r}
+
+#load csv files
+
+read.csv("2023 Sightings Data.xlsx")
+read.csv("2023 Whale Sighting Summary for NP.xlsx")
+read.csv("2024 Whale Sighting Summary.xlsx")
+read.csv("2023 EffortEnv.xlsx")
+read.csv("2023 Behavior.xlsx")
+
+#haven't actually loaded yet
+# also haven't pushed to the site yet cuz i'm just messing around with code and haven't made anything concrete yet
+# work on preliminary bar graph facetted by year to compare amount of sightings
+# also will have to figure out how to inclue the other notes to give them unique species for a bar graph cuz this year was real cool
+#jk just import from files lol
+
+```
+
+now packages
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+library(forcats)
+library(viridis)
+
+```
+
+graph #1 for peer review in class 11/5 (election day ... so spooky)
+
+```{r}
+
+sighting_chart_1 <- read_excel("2023 Sightings Data.xlsx") %>% 
+  select(Species, Count) %>% 
+  filter(Species %in% c("Atlantic white sided dolphin", "Basking shark", "Blue shark", "Fin whale", "Grey seal", "Harbor Porpoise", "Harbor seal", "Humpback whale", "Minke whale", "Ocean Sunfish", "Other", "Tuna- bluefin"))
+
+
+ggplot(data = sighting_chart_1, aes(x = Species, y = Count, fill = Species)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Species Counts", x = "Species", y = "Count") +
+  theme(axis.text.x = element_text(angle = 50, hjust = 1),
+        plot.title = element_text(hjust = 0.5))
+#need to filter data more because that was awful (so so many dolphins)
+#maybe a better way to go would be from the summary and doing number of trips with certain species and doing an insane forloop with if else statements (if equal or greater to 1 in all species categories, give it a 1) to do it so i dont have a gazillion dolphins that skew the data
+
+```
+
+doing one for the debris in case it comes out better (should only be counts of 1) should push all these so i can look on the site to see them all perhaps
+
+```{r}
+
+debris_2023_1 <- read_excel("2023 Sightings Data.xlsx") %>%
+  select(Species, Count) %>% 
+  filter(Species %in% c("X Bag", "X Balloon", "X Bottle", "X Buoy", "X Can", "X Other", "X Unknown", "X Wrapper"))
+
+ggplot(data = debris_2023_1, aes(x = Species, y = Count, fill = Species)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Marine Debris Types and Counts", x = "Types of Marine Debris", y = "Count") +
+  theme(axis.text.x = element_text(angle = 50, hjust = 1),
+        plot.title = element_text(hjust = 0.5))
+
+```
+
+```{r}
+#copying straigh from chat cuz nothing is working right
+
+# Example of summarizing by species (if you want counts, or you can use another variable)
+species_summary <- debris_2023_1 %>%
+  group_by(Species) %>%
+  summarise(count = n()) # Adjust if you're working with a different numeric variable
+
+# Reorder species based on count in descending order
+species_summary <- species_summary %>%
+  mutate(Species = fct_reorder(Species, count, .desc = TRUE))
+
+species_summary <- species_summary %>%
+  mutate(Species = fct_relevel(Species, "X Other", "X Unknown", after = Inf))
+
+# Check the new order
+print(species_summary)
+
+# Plot the reordered data
+ggplot(species_summary, aes(x = Species, y = count, fill = Species)) +
+  geom_bar(stat = "identity") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  labs(title = "Marine Debris Types and Counts", x = "Types of Marine Debris", y = "Count") +
+  theme(axis.text.x = element_text(angle = 50, hjust = 1),
+        plot.title = element_text(hjust = 0.5))
+
+```
