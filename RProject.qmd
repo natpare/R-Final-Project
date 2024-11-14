@@ -22,7 +22,7 @@ One in particular, Granite State Whale Watching works in conjunction with the Bl
 Using the Blue Ocean data form the 2023 and 2024 seasons, this study seeks to show the seasonal and between season fluctuations of whale watching, by answering the broad question of what trends and patterns can be observed between associations, behaviors, and sightings of animals between the 2023 and 2024 whale watching seasons?
 
 ##Methods##
-*The data used in this study is courtesy of the Blue Ocean Society for Marine Conservation that records survey data about marine life in the Gulf of Maine.
+*The data used in this study is courtesy of the Blue Ocean Society for Marine Conservation that records survey data about marine life in the Gulf of Maine.*
 ##Study Area##
 The specific area of study within the Gulf of Maine was Jeffrey's Ledge. It is a series of ledges and plateaus 54km long off the coasts of Maine, New Hampshire and Massachusetts stretching from Kennebunk, Maine to Cape Ann, Massachusetts. The water above the ledge ranges from 40-50m while the average water depth around the ledge is 90-150m (find a source and cite it please). This difference produces upwelling currents that fuel a productive feeding ground for whales and other animals within the GOM during the spring fall and summer months.
 I think I should include this because people may not know about the ledge and why it's important...but is it better suited for the intro?
@@ -119,7 +119,6 @@ ggplot(data = debris_2023_1, aes(x = Species, y = Count, fill = Species)) +
 ```
 
 ```{r}
-#copying straigh from chat cuz nothing is working right
 
 # Example of summarizing by species (if you want counts, or you can use another variable)
 species_summary <- debris_2023_1 %>%
